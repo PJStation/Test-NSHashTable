@@ -9,6 +9,9 @@
 
 
 /*
+ 
+ 哈希表用来存储若引用关系的时候使用，基本用不到
+ 
  enum {
      // 默认行为，强引用集合中的对象，等同于NSSet
      NSHashTableStrongMemory             = 0,
