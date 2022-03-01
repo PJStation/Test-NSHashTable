@@ -10,7 +10,7 @@
 
 /*
  
- 哈希表用来存储若引用关系的时候使用，基本用不到
+ NSHashTable哈希表用来存储弱引用关系的时候使用，基本用不到
  
  enum {
      // 默认行为，强引用集合中的对象，等同于NSSet
@@ -36,39 +36,68 @@
     NSMutableSet         *_set;
     NSHashTable          *_hashTable;
     
+    NSMapTable<NSObject*,NSObject*> *mapTable;
+    NSPointerArray *pointerArray;
+    
 }
+
 - (instancetype)init {
     self = [super init];
     if (self) {
+//        pointerArray = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsOpaqueMemory];
+//        Node *node = (Node *)malloc(sizeof(Node));
+//        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+//        [mutableArray addObject:(__bridge id _Nonnull)(node)];
+//        [pointerArray addPointer:node];
+        
+//        [_dic objectForKey:""];
+        
+        
+//        mapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory
+//                                         valueOptions:NSPointerFunctionsStrongMemory];
+//        NSObject *objKey = [NSObject new];
+//        NSObject *objValue = [NSObject new];
+//        [mapTable setObject:objValue forKey:objKey];
+//        NSLog(@"%@",[mapTable objectForKey:objKey]);
+        
+        
+//        NSNumber *nu;
+//        NSString * s;
+//        NSArray *AAL;
+//        NSDictionary *dd;
+    
+        
+        
         [self testWeakMemory];
-        NSLog(@"hash table [init]: %@", _hashTable);
-        NSLog(@"NSMutableSet 的强引用%@", _set);
-        NSLog(@"NSMutableDictionary 的强引用%@", _dic);
+        NSLog(@"_hashTable: %@", _hashTable);
+//        NSLog(@"NSMutableSet 的强引用%@", _set);
+//        NSLog(@"NSMutableDictionary 的强引用%@", _dic);
 
     }
     return self;
 }
 - (void)testWeakMemory {
     if (!_hashTable) {
-        _hashTable = [NSHashTable weakObjectsHashTable];
+//        _hashTable = [NSHashTable weakObjectsHashTable];
+        _hashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsOpaqueMemory];
     }
     NSObject *obj = [[NSObject alloc] init];
     [_hashTable addObject:obj];
     NSLog(@"hash table [testWeakMemory] : %@", _hashTable);
     
-    if (!_set) {
-        _set = [[NSMutableSet alloc] init];
-    }
-    NSObject *obj2 = [[NSObject alloc] init];
-    [_set addObject:obj2];
-    NSLog(@"_set [testWeakMemory] : %@", _set);
-    
-    
-    if (!_dic) {
-        _dic = [NSMutableDictionary dictionary];
-    }
-    NSObject *obj3 = [[NSObject alloc] init];
-    _dic[@"obj"] = obj3;
-    NSLog(@"_dic [testWeakMemory] : %@", _dic);
+//    if (!_set) {
+//        _set = [[NSMutableSet alloc] init];
+//    }
+//    NSObject *obj2 = [[NSObject alloc] init];
+//    [_set addObject:obj2];
+//    NSLog(@"_set [testWeakMemory] : %@", _set);
+//
+//
+//    if (!_dic) {
+//        _dic = [NSMutableDictionary dictionary];
+//    }
+//    NSObject *obj3 = [[NSObject alloc] init];
+//    _dic[@"obj"] = obj3;
+//    NSLog(@"_dic [testWeakMemory] : %@", _dic);
 }
 @end

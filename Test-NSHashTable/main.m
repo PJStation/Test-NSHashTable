@@ -12,8 +12,6 @@ TestHashAndMapTableClass *a;
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
         a = [TestHashAndMapTableClass new];
     }
     return 0;
